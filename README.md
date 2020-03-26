@@ -44,7 +44,7 @@ python3 corsserver.py
 
 This is your local server. Keep this running.
 
-Now open up *game.ts* in your favorite text editor, and start coding!
+Now open up *game.ts* in your favorite text editor ([Visual Studio Code](https://code.visualstudio.com/) is great for writing TypeScript), and start coding!
 
 ### Compiling TypeScript
 
@@ -67,10 +67,6 @@ in the folder where your TypeScript code is. This compiles as soon as any change
 ### Running the game
 
 For running the game simply open the test.html file in a browser. This file should be self-explanatory and can be edited for your liking.
-
-### Tips
-
-[Visual Studio Code](https://code.visualstudio.com/) is great for writing TypeScript.
 
 ## Authors
 
