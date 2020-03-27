@@ -28,7 +28,7 @@
 var canvas: HTMLCanvasElement;
 var context: CanvasRenderingContext2D;
 
-var _g; Graphics;
+var _g: Graphics;
 var frameCount: number = 0;
 var fpsInterval: number;
 var startTime: number;
@@ -103,7 +103,7 @@ window.onload = () => {
     context.imageSmoothingEnabled = interpolation;
 
     _g = new Graphics(context);
-    _g.scale(scale);
+    _g.setScale(scale);
     startGameloop(fps);
 }
 
