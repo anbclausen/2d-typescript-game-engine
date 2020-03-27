@@ -12,6 +12,8 @@ class Graphics {
      */
     constructor(ctx: CanvasRenderingContext2D) {
         this.ctx = ctx;
+        this.ctx.lineWidth = 2;
+        this.ctx.textAlign = "start";
     }
 
     /**
@@ -26,6 +28,61 @@ class Graphics {
     }
 
     /**
+     * Sets the line width of future elements drawn to the canvas.
+     * @param linewidth 
+     */
+    setLineWidth(linewidth: number) {
+        this.ctx.lineWidth = linewidth;
+    }
+
+    /**
+     * Sets the position value that refers to what strings are drawn relative to.
+     * @param position Value specifying how future strings are drawn in relative to the given coordinates.
+     * 
+     * Example: ```setStringRelativePosition("center);```. The x coordinate of future strings now refers to
+     * where the center of the string is placed on the canvas.
+     */
+    setStringRelativePosition(position: CanvasTextAlign) {
+        this.ctx.textAlign = position;
+    }
+
+    /**
+     * Scales the view of the CanvasRenderingContext2D element.
+     * @param multiplier The amount you want to scale. 1 represents no scaling.
+     * 
+     * Example: ```setScale(2);```
+     * 
+     * Beware that this affects the coordinates of your elements. If x position 800 was at the right of your canvas before, x position 400 will now be after ```scale(2)```.
+     */
+    setScale(multiplier: number) {
+        this.ctx.scale(multiplier, multiplier)
+    }
+
+    /**
+     * Sets the opacity of future items drawn on canvas.
+     * @param alpha An alpha value between 0 and 1. 0 represents complete transparency, 1 complete opaqueness.
+     * 
+     * Example: ```setAlpha(0.5);```
+     */
+    setAlpha(alpha: number) {
+        this.ctx.globalAlpha = alpha;
+    }
+
+    /**
+     * Sets the font for the graphics context.
+     * @param s String reprensting both font size and font-family. This string can contain either text size, font-family or both.
+     * 
+     * Example: ```setFont("10px Arial");```
+     */
+    setFont(s: string) {
+        if (s.indexOf(' ') != -1) {
+            this.ctx.font = s;
+        } else {
+            this.ctx.font = s + ' ' + this.ctx.font.split(' ')[this.ctx.font.split(' ').length - 1];
+        }
+    }
+
+    /**
      * Fills a rectangle with the given dimensions at the given position.
      * @param x The x coordinate the sprite is drawn to on the canvas.
      * @param y The y coordinate the sprite is drawn to on the canvas.
@@ -37,41 +94,26 @@ class Graphics {
     }
 
     /**
-     * Draws a rectangle at the given position with an optional specified line width.
+     * Draws a rectangle at the given position.
      * @param x The x coordinate the sprite is drawn to on the canvas.
      * @param y The y coordinate the sprite is drawn to on the canvas.
      * @param w The width of the rectangle in pixels.
      * @param h The height of the rectangle in pixels.
-     * @param thickness An optional parameter specifying the line width.
      */
-    drawRect(x: number, y: number, w: number, h: number, thickness?: number) {
+    drawRect(x: number, y: number, w: number, h: number) {
         this.ctx.beginPath();
         this.ctx.rect(x, y, w, h);
-        if (thickness == null) {
-            this.ctx.lineWidth = 2;
-        } else {
-            this.ctx.lineWidth = thickness;
-        }
         this.ctx.stroke();
     }
 
     /**
-     * Draws the given string at the given position with an optional CanvasTextAlign argument.
+     * Draws the given string at the given position.
      * @param s The string you want to draw.
      * @param x The x coordinate the sprite is drawn to on the canvas.
      * @param y The y coordinate the sprite is drawn to on the canvas.
-     * @param position Optional value specifying how the string is drawn relative to the given coordinate. Default value "start".
-     * 
-     * Example: ```drawString("Hello, World!", 100, 100, "center");```
      */
-    drawString(s: string, x: number, y: number, position?: CanvasTextAlign) {
-        if (position) {
-            this.ctx.textAlign = position;
-        }
+    drawString(s: string, x: number, y: number) {
         this.ctx.fillText(s, x, y);
-        if (position) {
-            this.ctx.textAlign = "start";
-        }
     }
 
     /**
@@ -114,42 +156,6 @@ class Graphics {
             spriteWidth,
             spriteHeight
         );
-    }
-
-    /**
-     * Scales the view of the CanvasRenderingContext2D element.
-     * @param multiplier The amount you want to scale. 1 represents no scaling.
-     * 
-     * Example: ```scale(2);```
-     * 
-     * Beware that this affects the coordinates of your elements. If x position 800 was at the right of your canvas before, x position 400 will now be after ```scale(2)```.
-     */
-    scale(multiplier: number) {
-        this.ctx.scale(multiplier, multiplier)
-    }
-
-    /**
-     * Sets the opacity of future items drawn on canvas.
-     * @param alpha An alpha value between 0 and 1. 0 represents complete transparency, 1 complete opaqueness.
-     * 
-     * Example: ```setAlpha(0.5);```
-     */
-    setAlpha(alpha: number) {
-        this.ctx.globalAlpha = alpha;
-    }
-
-    /**
-     * Sets the font for the graphics context.
-     * @param s String reprensting both font size and font-family. This string can contain either text size, font-family or both.
-     * 
-     * Example: ```setFont("10px Arial");```
-     */
-    setFont(s: string) {
-        if (s.indexOf(' ') != -1) {
-            this.ctx.font = s;
-        } else {
-            this.ctx.font = s + ' ' + this.ctx.font.split(' ')[this.ctx.font.split(' ').length - 1];
-        }
     }
 }
 
