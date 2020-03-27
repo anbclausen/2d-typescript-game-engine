@@ -70,16 +70,12 @@ class Graphics {
 
     /**
      * Sets the font for the graphics context.
-     * @param s String reprensting both font size and font-family. This string can contain either text size, font-family or both.
+     * @param s String reprensting both font size and font-family.
      * 
-     * Example: ```setFont("10px Arial");```
+     * Example: ```setFont("italic small-caps bold 12px arial");```
      */
     setFont(s: string) {
-        if (s.indexOf(' ') != -1) {
-            this.ctx.font = s;
-        } else {
-            this.ctx.font = s + ' ' + this.ctx.font.split(' ')[this.ctx.font.split(' ').length - 1];
-        }
+        this.ctx.font = s;
     }
 
     /**
