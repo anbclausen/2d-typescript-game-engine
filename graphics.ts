@@ -39,7 +39,7 @@ class Graphics {
      * Sets the position value that refers to what strings are drawn relative to.
      * @param position Value specifying how future strings are drawn in relative to the given coordinates.
      * 
-     * Example: ```setStringRelativePosition("center);```. The x coordinate of future strings now refers to
+     * Example: ```setStringRelativePosition("center");```. The x coordinate of future strings now refers to
      * where the center of the string is placed on the canvas.
      */
     setStringRelativePosition(position: CanvasTextAlign) {
