@@ -40,4 +40,13 @@ class Game {
     keyReleased(e: KeyboardEvent) {
 
     }
+
+    mouseClicked(e: MouseEvent, x: number, y: number) {
+        // writing the clicked location to the console
+        console.log("Mouse clicked at " + x + ", " + y);
+    }
+
+    mouseMoved(e: MouseEvent, x: number, y: number) {
+
+    }
 }

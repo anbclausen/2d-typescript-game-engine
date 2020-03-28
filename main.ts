@@ -9,8 +9,8 @@
 //The only thing you should edit in this class
 {
     //width and height for canvas in browser
-    var WIDTH: number = 1280;
-    var HEIGHT: number = 720;
+    var WIDTH: number = 1365;
+    var HEIGHT: number = 805;
 
     //frames per second of the game (60 is about max, but it's unstable), go for 30-55
     var fps: number = 30;
@@ -61,6 +61,18 @@ class Main {
     keyReleased(e: KeyboardEvent) {
         this.game.keyReleased(e);
     }
+
+    mouseClicked(e: MouseEvent) {
+        let x = e.offsetX / scale;
+        let y = e.offsetY / scale;
+        this.game.mouseClicked(e, x, y);
+    }
+
+    mouseMoved(e: MouseEvent) {
+        let x = e.offsetX / scale;
+        let y = e.offsetY / scale;
+        this.game.mouseMoved(e, x, y);
+    }
 }
 
 // This line starts it all.
@@ -105,24 +117,61 @@ window.onload = () => {
     _g = new Graphics(context);
     _g.setScale(scale);
     startGameloop(fps);
+
+    addEvents();
 }
 
-window.addEventListener("keydown", function (event) {
-    if (event.defaultPrevented) {
-        return;
-    }
+function addEvents(){
+    addKeyDownEvent();
+    addKeyUpEvent();
+    addMouseDownEvent()
+    addMouseMoveEvent();
+}
 
-    main.keyPressed(event);
+function addKeyDownEvent(){
+    window.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+            return;
+        }
+    
+        main.keyPressed(event);
+    
+        event.preventDefault();
+    }, true);
+}
 
-    event.preventDefault();
-}, true);
+function addKeyUpEvent(){
+    window.addEventListener("keyup", function (event) {
+        if (event.defaultPrevented) {
+            return;
+        }
+    
+        main.keyReleased(event);
+    
+        event.preventDefault();
+    }, true);
+}
 
-window.addEventListener("keyup", function (event) {
-    if (event.defaultPrevented) {
-        return;
-    }
+function addMouseDownEvent(){
+    canvas.addEventListener("mousedown", function (event) {
+        if (event.defaultPrevented) {
+            return;
+        }
+    
+        main.mouseClicked(event);
+    
+        event.preventDefault();
+    }, true);
+}
 
-    main.keyReleased(event);
-
-    event.preventDefault();
-}, true);
+function addMouseMoveEvent(){
+    canvas.addEventListener("mousemove", function (event) {
+        if (event.defaultPrevented) {
+            return;
+        }
+    
+        main.mouseMoved(event);
+    
+        event.preventDefault();
+    }, true);
+}
