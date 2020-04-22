@@ -37,7 +37,6 @@ var fpsInterval: number;
 var startTime: number;
 var now: number;
 var then: number;
-var elapsed: number;
 
 
 class Main {
@@ -93,7 +92,7 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 
     now = Date.now();
-    elapsed = now - then;
+    let elapsed = now - then;
 
     if (elapsed > fpsInterval) {
         if (skipFrames) {
