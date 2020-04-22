@@ -20,6 +20,9 @@
 
     //turn interpolation on or off (pixelate or not)
     var interpolation: boolean = false;
+
+    //skips frames if it falls more than one frame behind
+    var skipFrames: boolean = true;
 }
 
 /// <reference path="graphics.ts"/>
@@ -93,13 +96,17 @@ function gameLoop() {
     elapsed = now - then;
 
     if (elapsed > fpsInterval) {
-
-        then = now - (elapsed % fpsInterval);
+        if (skipFrames) {
+            then = now - (elapsed % fpsInterval);
+        }
+        else {
+            then += fpsInterval;
+        }
 
         main.draw();
         main.update();
-        var sinceStart = now - startTime;
-        var currentFps = Math.round(1000 / (sinceStart / ++frameCount) * 100) / 100;
+        //var sinceStart = now - startTime;
+        //var currentFps = Math.round(1000 / (sinceStart / ++frameCount) * 100) / 100;
         //console.log(currentFps + " fps.");
 
     }
