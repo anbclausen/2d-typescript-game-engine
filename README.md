@@ -79,3 +79,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 * Code for python server is directly taken from [this](https://stackoverflow.com/a/21957017) stackoverflow answer.
+* [johandegn](https://github.com/johandegn) did some minor modifications to this project. Thanks for that!
