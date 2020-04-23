@@ -59,7 +59,7 @@ in your terminal to compile from TypeScript to JavaScript.
 Alternatively just run the command
 
 ```
-tsc --watch
+tsc -w
 ```
 
 in the folder where your TypeScript code is. This compiles as soon as any changes are detected in your TypeScript code.
@@ -79,4 +79,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 * Code for python server is directly taken from [this](https://stackoverflow.com/a/21957017) stackoverflow answer.
-* [johandegn](https://github.com/johandegn) did some minor modifications to this project. Thanks for that!
+* [johandegn](https://github.com/johandegn) did some modifications to this project. Thanks for that!
