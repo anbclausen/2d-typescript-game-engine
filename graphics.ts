@@ -97,8 +97,117 @@ class Graphics {
      * @param h The height of the rectangle in pixels.
      */
     drawRect(x: number, y: number, w: number, h: number) {
+        this.ctx.strokeRect(x, y, w, h);
+    }
+
+    /**
+     * Fills a circle with the given radius at the given position.
+     * @param x The x coordinate for the center of the circle.
+     * @param y The y coordinate for the center of the circle.
+     * @param r The radius of the circle.
+     */
+    fillCircle(x: number, y: number, r:number) {
         this.ctx.beginPath();
-        this.ctx.rect(x, y, w, h);
+        this.ctx.arc(x, y, r, 0, 2 * Math.PI);
+        this.ctx.fill(); 
+    }
+
+    /**
+     * Draws a circle with the given radius at the given position.
+     * @param x The x coordinate for the center of the circle.
+     * @param y The y coordinate for the center of the circle.
+     * @param r The radius of the circle.
+     */
+    drawCircle(x: number, y: number, r:number) {
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, r, 0, 2 * Math.PI);
+        this.ctx.stroke(); 
+    }
+
+    /**
+     * Fills an arc at the given coordinates with the given radius and angles.
+     * @param x The x coordinate for the center of the arc.
+     * @param y The y coordinate for the center of the arc.
+     * @param r The radius for the arc.
+     * @param sa The start angle for the arc, in radians.
+     * @param ea The end angle for the arc, in radians.
+     */
+    fillArc(x: number, y: number, r:number, sa:number, ea: number) {
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, r, sa, ea);
+        this.ctx.fill(); 
+    }
+
+    /**
+     * Draws an arc at the given coordinates with the given radius and angles.
+     * @param x The x coordinate for the center of the arc.
+     * @param y The y coordinate for the center of the arc.
+     * @param r The radius for the arc.
+     * @param sa The start angle for the arc, in radians.
+     * @param ea The end angle for the arc, in radians.
+     */
+    drawArc(x: number, y: number, r:number, sa:number, ea: number) {
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, r, sa, ea);
+        this.ctx.stroke(); 
+    }
+
+    /**
+     * Fills a polygon at the given coorinates with the radius and number of sides specified.
+     * @param x The x coordinate for the center of the polygon.
+     * @param y The y coordinate for the center of the polygon.
+     * @param r The radius of the polygon.
+     * @param n The number of sides in the polygon
+     */
+    fillPolygon(x: number, y: number, r: number, n: number) {
+        this.makePolygon(x, y, r, n, true);
+    }
+
+    /**
+     * Draws a polygon at the given coorinates with the radius and number of sides specified.
+     * @param x The x coordinate for the center of the polygon.
+     * @param y The y coordinate for the center of the polygon.
+     * @param r The radius of the polygon.
+     * @param n The number of sides in the polygon
+     */
+    drawPolygon(x: number, y: number, r: number, n: number) {
+        this.makePolygon(x, y, r, n, false);
+    }
+
+    /**
+     * The actual implementation of the making of the polygon. Draws the polygon, and fills it if specified.
+     * @param x The x coordinate for the center of the polygon.
+     * @param y The y coordinate for the center of the polygon.
+     * @param r The radius of the polygon.
+     * @param n The number of sides in the polygon
+     * @param fill A boolean indicating if the polygon should be filled.
+     */
+    private makePolygon(x: number, y: number, r: number, n: number, fill: boolean) {
+        let ang = Math.PI * 2 / n;
+        this.ctx.beginPath();
+        this.ctx.moveTo(Math.sin(ang + Math.PI) * r + x, Math.cos(ang + Math.PI) * r + y);
+        for (let i = 0; i <= n; i++) {
+            this.ctx.lineTo(Math.sin(ang * i + Math.PI) * r + x, Math.cos(ang * i + Math.PI) * r + y);
+        }
+        if (fill) {
+            this.ctx.fill();
+        }
+        else {
+            this.ctx.stroke();
+        }
+    }
+
+    /**
+     * Draws a line from one point to another.
+     * @param x1 The x coordinate for the first point.
+     * @param y1 The y coordinate for the first point.
+     * @param x2 The x coordinate for the second point.
+     * @param y2 The y coordinate for the second point.
+     */
+    drawLine(x1: number, y1: number, x2: number, y2: number) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(x1, y1);
+        this.ctx.lineTo(x2, y2);
         this.ctx.stroke();
     }
 
