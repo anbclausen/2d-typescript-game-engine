@@ -44,7 +44,7 @@ python3 corsserver.py
 
 This is your local server. Keep this running.
 
-Now open up *game.ts* in your favorite text editor, and start coding!
+Now open up *game.ts* in your favorite text editor ([Visual Studio Code](https://code.visualstudio.com/) is great for writing TypeScript), and start coding!
 
 ### Compiling TypeScript
 
@@ -68,10 +68,6 @@ in the folder where your TypeScript code is. This compiles as soon as any change
 
 For running the game simply open the test.html file in a browser. This file should be self-explanatory and can be edited for your liking.
 
-### Tips
-
-[Visual Studio Code](https://code.visualstudio.com/) is great for writing TypeScript.
-
 ## Authors
 
 * **Anders B. Clausen** - [anbclausen](https://github.com/anbclausen)
@@ -83,3 +79,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 * Code for python server is directly taken from [this](https://stackoverflow.com/a/21957017) stackoverflow answer.
+* [johandegn](https://github.com/johandegn) did some minor modifications to this project. Thanks for that!

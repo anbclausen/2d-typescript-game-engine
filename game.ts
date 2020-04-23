@@ -10,7 +10,7 @@ class Game {
 
     constructor() {
         // using the loadImg method in manager.ts to load typescript.png from your local server
-        this.image = loadImg("http://0.0.0.0:8000/typescript.png");
+        this.image = loadImg("http://127.0.0.1:8000/typescript.png");
 
         this.x = 100;
     }
@@ -38,6 +38,15 @@ class Game {
     }
 
     keyReleased(e: KeyboardEvent) {
+
+    }
+
+    mouseClicked(e: MouseEvent, x: number, y: number) {
+        // writing the clicked location to the console
+        console.log("Mouse clicked at " + x + ", " + y);
+    }
+
+    mouseMoved(e: MouseEvent, x: number, y: number) {
 
     }
 }
