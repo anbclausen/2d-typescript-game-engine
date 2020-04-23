@@ -198,6 +198,41 @@ class Graphics {
     }
 
     /**
+     * Fills a custom shape specified by array of coordinate points.
+     * @param ps The array containing tuples of coordinate points.
+     */
+    fillShape(ps: [number, number][]) {
+        this.makeShape(ps, true);
+    }
+
+    /**
+     * Draws a custom shape specified by array of coordinate points.
+     * @param ps The array containing tuples of coordinate points.
+     */
+    drawShape(ps: [number, number][]) {
+        this.makeShape(ps, false);
+    }
+
+    /**
+     * The actial implementation that makes the custom shape, and fills it if specified.
+     * @param ps The array containing tuples of coordinate points.
+     * @param fill A boolean indicating if the shape should be filled.
+     */
+    private makeShape(ps: [number, number][], fill: boolean) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(ps[0][0], ps[0][1]);
+        ps.forEach(p => {
+            this.ctx.lineTo(p[0], p[1]);
+        });
+        if (fill) {
+            this.ctx.fill();
+        }
+        else {
+            this.ctx.stroke();
+        }
+    }
+
+    /**
      * Draws a line from one point to another.
      * @param x1 The x coordinate for the first point.
      * @param y1 The y coordinate for the first point.
