@@ -4,7 +4,8 @@
  */
 class Graphics {
     ctx: CanvasRenderingContext2D;
-    private rotation;
+    private rotation: number;
+    private translation: [number, number];
 
     /**
      * Constructs a Graphics object. This object keeps track of the CanvasRenderingContext2D, which is used for drawing on the HTML canvas.
@@ -16,6 +17,7 @@ class Graphics {
         this.ctx.lineWidth = 2;
         this.ctx.textAlign = "start";
         this.rotation = 0;
+        this.translation = [0, 0];
     }
 
     /**
@@ -78,6 +80,26 @@ class Graphics {
      */
     setFont(s: string) {
         this.ctx.font = s;
+    }
+
+    addTranslation(x: number, y: number) {
+        this.ctx.translate(x, y)
+        this.translation[0] += x;
+        this.translation[1] += y;
+    }
+
+    setTranslation(x: number, y: number) {
+        this.resetTranslation();
+        this.addTranslation(x, y);
+    }
+
+    getTranslation(): [number, number] {
+        return this.translation;
+    }
+
+    resetTranslation() {
+        this.ctx.translate(-this.translation[0], -this.translation[1]);
+        this.translation = [0, 0];
     }
 
     /**
