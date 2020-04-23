@@ -82,24 +82,40 @@ class Graphics {
         this.ctx.font = s;
     }
 
+    /**
+     * Adds to the current translation of all drawn shapes.
+     * @param x The amount to translate along the x-axis.
+     * @param y The amount to translate along the y-axis.
+     */
     addTranslation(x: number, y: number) {
         this.ctx.translate(x, y)
         this.translation[0] += x;
         this.translation[1] += y;
     }
 
+    /**
+     * Sets the translation to a fixed coordinate.
+     * @param x The x coordinate of the fix translation.
+     * @param y The y coordinate of the fix translation.
+     */
     setTranslation(x: number, y: number) {
         this.resetTranslation();
         this.addTranslation(x, y);
     }
 
-    getTranslation(): [number, number] {
-        return this.translation;
-    }
-
+    /**
+     * Resets the translation back to the start [0, 0].
+     */
     resetTranslation() {
         this.ctx.translate(-this.translation[0], -this.translation[1]);
         this.translation = [0, 0];
+    }
+
+    /**
+     * Returns the translation coordinates as a tuple of numbers.
+     */
+    getTranslation(): [number, number] {
+        return this.translation;
     }
 
     /**
