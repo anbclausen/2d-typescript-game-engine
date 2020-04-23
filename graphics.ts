@@ -4,6 +4,7 @@
  */
 class Graphics {
     ctx: CanvasRenderingContext2D;
+    private rotation;
 
     /**
      * Constructs a Graphics object. This object keeps track of the CanvasRenderingContext2D, which is used for drawing on the HTML canvas.
@@ -14,6 +15,7 @@ class Graphics {
         this.ctx = ctx;
         this.ctx.lineWidth = 2;
         this.ctx.textAlign = "start";
+        this.rotation = 0;
     }
 
     /**
@@ -76,6 +78,40 @@ class Graphics {
      */
     setFont(s: string) {
         this.ctx.font = s;
+    }
+
+    /**
+     * Adds to the current rotation and affects all drawn elements.
+     * @param v The angle to change the roation by in radians.
+     */
+    addRotation(v: number) {
+        this.ctx.rotate(v);
+        this.rotation += v;
+        this.rotation %= 2 * Math.PI; // wrap
+    }
+
+    /**
+     * Set the rotation to a fixed angle.
+     * @param v The angle to set the roation to in radians.
+     */
+    setRotation(v: number) {
+        this.resetRotation();
+        this.addRotation(v);
+    }
+
+    /**
+     * Resets the rotation to the 0.
+     */
+    resetRotation() {
+        this.ctx.rotate(-this.rotation);
+        this.rotation = 0;
+    }
+
+    /**
+     * Returns the current rotation.
+     */
+    getRotation(): number {
+        return this.rotation;
     }
 
     /**
@@ -158,9 +194,10 @@ class Graphics {
      * @param y The y coordinate for the center of the polygon.
      * @param r The radius of the polygon.
      * @param n The number of sides in the polygon
+     * @param v The rotation of the polygon in radians. Default is 0.
      */
-    fillPolygon(x: number, y: number, r: number, n: number) {
-        this.makePolygon(x, y, r, n, true);
+    fillPolygon(x: number, y: number, r: number, n: number, v: number = 0) {
+        this.makePolygon(x, y, r, n, true, v);
     }
 
     /**
@@ -169,9 +206,10 @@ class Graphics {
      * @param y The y coordinate for the center of the polygon.
      * @param r The radius of the polygon.
      * @param n The number of sides in the polygon
+     * @param v The rotation of the polygon in radians. Default is 0.
      */
-    drawPolygon(x: number, y: number, r: number, n: number) {
-        this.makePolygon(x, y, r, n, false);
+    drawPolygon(x: number, y: number, r: number, n: number, v: number = 0) {
+        this.makePolygon(x, y, r, n, false, v);
     }
 
     /**
@@ -181,13 +219,16 @@ class Graphics {
      * @param r The radius of the polygon.
      * @param n The number of sides in the polygon
      * @param fill A boolean indicating if the polygon should be filled.
+     * @param v The rotation of the polygon in radians.
      */
-    private makePolygon(x: number, y: number, r: number, n: number, fill: boolean) {
+    private makePolygon(x: number, y: number, r: number, n: number, fill: boolean, v: number) {
         let ang = Math.PI * 2 / n;
+        this.ctx.translate(x , y);
+        this.ctx.rotate(v + Math.PI);
         this.ctx.beginPath();
-        this.ctx.moveTo(Math.sin(ang + Math.PI) * r + x, Math.cos(ang + Math.PI) * r + y);
+        this.ctx.moveTo(Math.sin(ang) * r, Math.cos(ang) * r);
         for (let i = 0; i <= n; i++) {
-            this.ctx.lineTo(Math.sin(ang * i + Math.PI) * r + x, Math.cos(ang * i + Math.PI) * r + y);
+            this.ctx.lineTo(Math.sin(ang * i) * r, Math.cos(ang * i) * r);
         }
         if (fill) {
             this.ctx.fill();
@@ -195,6 +236,8 @@ class Graphics {
         else {
             this.ctx.stroke();
         }
+        this.ctx.rotate(-(v + Math.PI));
+        this.ctx.translate(-x , -y);
     }
 
     /**
