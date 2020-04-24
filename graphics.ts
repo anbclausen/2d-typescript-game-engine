@@ -227,7 +227,7 @@ class Graphics {
     }
 
     /**
-     * Fills a polygon at the given coorinates with the radius and number of sides specified.
+     * Fills a polygon at the given coordinates with the radius and number of sides specified.
      * @param x The x coordinate for the center of the polygon.
      * @param y The y coordinate for the center of the polygon.
      * @param r The radius of the polygon.
@@ -239,7 +239,7 @@ class Graphics {
     }
 
     /**
-     * Draws a polygon at the given coorinates with the radius and number of sides specified.
+     * Draws a polygon at the given coordinates with the radius and number of sides specified.
      * @param x The x coordinate for the center of the polygon.
      * @param y The y coordinate for the center of the polygon.
      * @param r The radius of the polygon.
