@@ -13,6 +13,6 @@
         "game.ts",
         "graphics.ts",
         "main.ts",
-        "manager.ts"
+        "util.ts"
     ]
 }

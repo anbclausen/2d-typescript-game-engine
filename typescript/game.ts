@@ -1,6 +1,3 @@
-///<reference path="manager.ts"/>
-///<reference path="graphics.ts"/>
-
 class Game {
     // images are represented as HTMLImageElements
     image: HTMLImageElement;
