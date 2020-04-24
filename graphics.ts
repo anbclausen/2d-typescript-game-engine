@@ -18,7 +18,6 @@ class Graphics {
         this.ctx.textAlign = "start";
         this.rotation = 0;
         this.translation = [0, 0];
-        this.pivot = [0, 0, 0]; // x, y, v
     }
 
     /**
