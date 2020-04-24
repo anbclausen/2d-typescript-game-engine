@@ -3,7 +3,7 @@
  * This class also contains a lot of useful rendering methods.
  */
 class Graphics {
-    ctx: CanvasRenderingContext2D;
+    private ctx: CanvasRenderingContext2D;
     private rotation: number;
     private translation: [number, number];
 
@@ -26,7 +26,7 @@ class Graphics {
      * 
      * Example: ```setColor("#ffffff")``` or ```setColor("white")```
      */
-    setColor(color: string) {
+    public setColor(color: string): void {
         this.ctx.fillStyle = color;
         this.ctx.strokeStyle = color;
     }
@@ -35,7 +35,7 @@ class Graphics {
      * Sets the line width of future elements drawn to the canvas.
      * @param linewidth 
      */
-    setLineWidth(linewidth: number) {
+    public setLineWidth(linewidth: number): void {
         this.ctx.lineWidth = linewidth;
     }
 
@@ -46,7 +46,7 @@ class Graphics {
      * Example: ```setStringRelativePosition("center");```. The x coordinate of future strings now refers to
      * where the center of the string is placed on the canvas.
      */
-    setStringRelativePosition(position: CanvasTextAlign) {
+    public setStringRelativePosition(position: CanvasTextAlign): void {
         this.ctx.textAlign = position;
     }
 
@@ -58,7 +58,7 @@ class Graphics {
      * 
      * Beware that this affects the coordinates of your elements. If x position 800 was at the right of your canvas before, x position 400 will now be after ```scale(2)```.
      */
-    setScale(multiplier: number) {
+    public setScale(multiplier: number): void {
         this.ctx.scale(multiplier, multiplier)
     }
 
@@ -68,7 +68,7 @@ class Graphics {
      * 
      * Example: ```setAlpha(0.5);```
      */
-    setAlpha(alpha: number) {
+    public setAlpha(alpha: number): void {
         this.ctx.globalAlpha = alpha;
     }
 
@@ -78,16 +78,16 @@ class Graphics {
      * 
      * Example: ```setFont("italic small-caps bold 12px arial");```
      */
-    setFont(s: string) {
+    public setFont(s: string): void {
         this.ctx.font = s;
     }
 
     /**
-     * Adds to the current translation of all drawn shapes.
+     * Adds to the current translation to all drawn shapes.
      * @param x The amount to translate along the x-axis.
      * @param y The amount to translate along the y-axis.
      */
-    addTranslation(x: number, y: number) {
+    public addTranslation(x: number, y: number): void {
         this.ctx.translate(x, y)
         this.translation[0] += x;
         this.translation[1] += y;
@@ -98,7 +98,7 @@ class Graphics {
      * @param x The x coordinate of the fix translation.
      * @param y The y coordinate of the fix translation.
      */
-    setTranslation(x: number, y: number) {
+    public setTranslation(x: number, y: number): void {
         this.resetTranslation();
         this.addTranslation(x, y);
     }
@@ -106,7 +106,7 @@ class Graphics {
     /**
      * Resets the translation back to the start [0, 0].
      */
-    resetTranslation() {
+    public resetTranslation(): void {
         this.ctx.translate(-this.translation[0], -this.translation[1]);
         this.translation = [0, 0];
     }
@@ -114,7 +114,7 @@ class Graphics {
     /**
      * Returns the translation coordinates as a tuple of numbers.
      */
-    getTranslation(): [number, number] {
+    public getTranslation(): [number, number] {
         return this.translation;
     }
 
@@ -122,7 +122,7 @@ class Graphics {
      * Adds to the current rotation and affects all drawn elements.
      * @param v The angle to change the roation by in radians.
      */
-    addRotation(v: number) {
+    public addRotation(v: number): void {
         this.ctx.rotate(v);
         this.rotation += v;
         this.rotation %= 2 * Math.PI; // wrap
@@ -132,7 +132,7 @@ class Graphics {
      * Set the rotation to a fixed angle.
      * @param v The angle to set the roation to in radians.
      */
-    setRotation(v: number) {
+    public setRotation(v: number): void {
         this.resetRotation();
         this.addRotation(v);
     }
@@ -140,7 +140,7 @@ class Graphics {
     /**
      * Resets the rotation to the 0.
      */
-    resetRotation() {
+    public resetRotation(): void {
         this.ctx.rotate(-this.rotation);
         this.rotation = 0;
     }
@@ -148,8 +148,24 @@ class Graphics {
     /**
      * Returns the current rotation.
      */
-    getRotation(): number {
+    public getRotation(): number {
         return this.rotation;
+    }
+
+    /**
+     * Converts degrees to radians.
+     * @param v The angle in degrees.
+     */
+    public degToRad(v: number): number {
+        return v / 360 * 2 * Math.PI;
+    }
+
+    /**
+     * Converts radians to degrees.
+     * @param v The angle in radians.
+     */
+    public radToDeg(v: number): number {
+        return v / (2 * Math.PI) * 360;
     }
 
     /**
@@ -159,7 +175,7 @@ class Graphics {
      * @param w The width of the rectangle in pixels.
      * @param h The height of the rectangle in pixels.
      */
-    fillRect(x: number, y: number, w: number, h: number) {
+    public fillRect(x: number, y: number, w: number, h: number): void {
         this.ctx.fillRect(x, y, w, h);
     }
 
@@ -170,7 +186,7 @@ class Graphics {
      * @param w The width of the rectangle in pixels.
      * @param h The height of the rectangle in pixels.
      */
-    drawRect(x: number, y: number, w: number, h: number) {
+    public drawRect(x: number, y: number, w: number, h: number): void {
         this.ctx.strokeRect(x, y, w, h);
     }
 
@@ -180,7 +196,7 @@ class Graphics {
      * @param y The y coordinate for the center of the circle.
      * @param r The radius of the circle.
      */
-    fillCircle(x: number, y: number, r:number) {
+    public fillCircle(x: number, y: number, r:number): void {
         this.ctx.beginPath();
         this.ctx.arc(x, y, r, 0, 2 * Math.PI);
         this.ctx.fill(); 
@@ -192,7 +208,7 @@ class Graphics {
      * @param y The y coordinate for the center of the circle.
      * @param r The radius of the circle.
      */
-    drawCircle(x: number, y: number, r:number) {
+    public drawCircle(x: number, y: number, r:number): void {
         this.ctx.beginPath();
         this.ctx.arc(x, y, r, 0, 2 * Math.PI);
         this.ctx.stroke(); 
@@ -206,7 +222,7 @@ class Graphics {
      * @param sa The start angle for the arc, in radians.
      * @param ea The end angle for the arc, in radians.
      */
-    fillArc(x: number, y: number, r:number, sa:number, ea: number) {
+    public fillArc(x: number, y: number, r:number, sa:number, ea: number): void {
         this.ctx.beginPath();
         this.ctx.arc(x, y, r, sa, ea);
         this.ctx.fill(); 
@@ -220,34 +236,34 @@ class Graphics {
      * @param sa The start angle for the arc, in radians.
      * @param ea The end angle for the arc, in radians.
      */
-    drawArc(x: number, y: number, r:number, sa:number, ea: number) {
+    public drawArc(x: number, y: number, r:number, sa:number, ea: number): void {
         this.ctx.beginPath();
         this.ctx.arc(x, y, r, sa, ea);
         this.ctx.stroke(); 
     }
 
     /**
-     * Fills a polygon at the given coorinates with the radius and number of sides specified.
+     * Fills a polygon at the given coordinates with the radius and number of sides specified.
      * @param x The x coordinate for the center of the polygon.
      * @param y The y coordinate for the center of the polygon.
      * @param r The radius of the polygon.
      * @param n The number of sides in the polygon
-     * @param v The rotation of the polygon in radians. Default is 0.
+     * @param v The rotation of the polygon in radians.
      */
-    fillPolygon(x: number, y: number, r: number, n: number, v: number = 0) {
-        this.makePolygon(x, y, r, n, true, v);
+    public fillPolygon(x: number, y: number, r: number, n: number, v: number): void {
+        this.makePolygon(x, y, r, n, v, true);
     }
 
     /**
-     * Draws a polygon at the given coorinates with the radius and number of sides specified.
+     * Draws a polygon at the given coordinates with the radius and number of sides specified.
      * @param x The x coordinate for the center of the polygon.
      * @param y The y coordinate for the center of the polygon.
      * @param r The radius of the polygon.
      * @param n The number of sides in the polygon
-     * @param v The rotation of the polygon in radians. Default is 0.
+     * @param v The rotation of the polygon in radians.
      */
-    drawPolygon(x: number, y: number, r: number, n: number, v: number = 0) {
-        this.makePolygon(x, y, r, n, false, v);
+    public drawPolygon(x: number, y: number, r: number, n: number, v: number): void {
+        this.makePolygon(x, y, r, n, v, false);
     }
 
     /**
@@ -256,13 +272,13 @@ class Graphics {
      * @param y The y coordinate for the center of the polygon.
      * @param r The radius of the polygon.
      * @param n The number of sides in the polygon
-     * @param fill A boolean indicating if the polygon should be filled.
      * @param v The rotation of the polygon in radians.
+     * @param fill A boolean indicating if the polygon should be filled.
      */
-    private makePolygon(x: number, y: number, r: number, n: number, fill: boolean, v: number) {
+    private makePolygon(x: number, y: number, r: number, n: number, v: number, fill: boolean): void {
         let ang = Math.PI * 2 / n;
-        this.ctx.translate(x , y);
-        this.ctx.rotate(v + Math.PI);
+        this.addTranslation(x, y);
+        this.addRotation(v + Math.PI);
         this.ctx.beginPath();
         this.ctx.moveTo(Math.sin(ang) * r, Math.cos(ang) * r);
         for (let i = 0; i <= n; i++) {
@@ -274,15 +290,15 @@ class Graphics {
         else {
             this.ctx.stroke();
         }
-        this.ctx.rotate(-(v + Math.PI));
-        this.ctx.translate(-x , -y);
+        this.addRotation(-(v + Math.PI));
+        this.addTranslation(-x, -y);
     }
 
     /**
      * Fills a custom shape specified by array of coordinate points.
      * @param ps The array containing tuples of coordinate points.
      */
-    fillShape(ps: [number, number][]) {
+    public fillShape(ps: [number, number][]): void {
         this.makeShape(ps, true);
     }
 
@@ -290,7 +306,7 @@ class Graphics {
      * Draws a custom shape specified by array of coordinate points.
      * @param ps The array containing tuples of coordinate points.
      */
-    drawShape(ps: [number, number][]) {
+    public drawShape(ps: [number, number][]): void {
         this.makeShape(ps, false);
     }
 
@@ -299,7 +315,7 @@ class Graphics {
      * @param ps The array containing tuples of coordinate points.
      * @param fill A boolean indicating if the shape should be filled.
      */
-    private makeShape(ps: [number, number][], fill: boolean) {
+    private makeShape(ps: [number, number][], fill: boolean): void {
         this.ctx.beginPath();
         this.ctx.moveTo(ps[0][0], ps[0][1]);
         ps.forEach(p => {
@@ -320,7 +336,7 @@ class Graphics {
      * @param x2 The x coordinate for the second point.
      * @param y2 The y coordinate for the second point.
      */
-    drawLine(x1: number, y1: number, x2: number, y2: number) {
+    public drawLine(x1: number, y1: number, x2: number, y2: number): void {
         this.ctx.beginPath();
         this.ctx.moveTo(x1, y1);
         this.ctx.lineTo(x2, y2);
@@ -333,7 +349,7 @@ class Graphics {
      * @param x The x coordinate the sprite is drawn to on the canvas.
      * @param y The y coordinate the sprite is drawn to on the canvas.
      */
-    drawString(s: string, x: number, y: number) {
+    public drawString(s: string, x: number, y: number): void {
         this.ctx.fillText(s, x, y);
     }
 
@@ -343,7 +359,7 @@ class Graphics {
      * @param x The x coordinate the sprite is drawn to on the canvas.
      * @param y The y coordinate the sprite is drawn to on the canvas.
      */
-    drawImage(img: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement, x: number, y: number) {
+    public drawImage(img: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement, x: number, y: number): void {
         this.ctx.drawImage(img, x, y);
     }
 
@@ -364,7 +380,7 @@ class Graphics {
      * 
      * ```drawSprite(sheet, 100, 100, 4, 3, 2, 1);```
      */
-    drawSprite(img: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement, xpos: number, ypos: number, cols: number, rows: number, spritex: number, spritey: number) {
+    public drawSprite(img: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement, xpos: number, ypos: number, cols: number, rows: number, spritex: number, spritey: number): void {
         let spriteWidth: number = img.width / cols;
         let spriteHeight: number = img.height / rows;
         this.ctx.drawImage(img,
