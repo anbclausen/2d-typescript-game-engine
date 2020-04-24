@@ -232,9 +232,9 @@ class Graphics {
      * @param y The y coordinate for the center of the polygon.
      * @param r The radius of the polygon.
      * @param n The number of sides in the polygon
-     * @param v The rotation of the polygon in radians. Default is 0.
+     * @param v The rotation of the polygon in radians.
      */
-    public fillPolygon(x: number, y: number, r: number, n: number, v: number = 0): void {
+    public fillPolygon(x: number, y: number, r: number, n: number, v: number): void {
         this.makePolygon(x, y, r, n, true, v);
     }
 
@@ -244,9 +244,9 @@ class Graphics {
      * @param y The y coordinate for the center of the polygon.
      * @param r The radius of the polygon.
      * @param n The number of sides in the polygon
-     * @param v The rotation of the polygon in radians. Default is 0.
+     * @param v The rotation of the polygon in radians.
      */
-    public drawPolygon(x: number, y: number, r: number, n: number, v: number = 0): void {
+    public drawPolygon(x: number, y: number, r: number, n: number, v: number): void {
         this.makePolygon(x, y, r, n, false, v);
     }
 
@@ -261,8 +261,8 @@ class Graphics {
      */
     private makePolygon(x: number, y: number, r: number, n: number, fill: boolean, v: number): void {
         let ang = Math.PI * 2 / n;
-        this.ctx.translate(x , y);
-        this.ctx.rotate(v + Math.PI);
+        this.addTranslation(x , y);
+        this.addRotation(v + Math.PI);
         this.ctx.beginPath();
         this.ctx.moveTo(Math.sin(ang) * r, Math.cos(ang) * r);
         for (let i = 0; i <= n; i++) {
@@ -274,8 +274,8 @@ class Graphics {
         else {
             this.ctx.stroke();
         }
-        this.ctx.rotate(-(v + Math.PI));
-        this.ctx.translate(-x , -y);
+        this.addRotation(-(v + Math.PI));
+        this.addTranslation(-x , -y);
     }
 
     /**
