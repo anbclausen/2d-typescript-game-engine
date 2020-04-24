@@ -6,6 +6,7 @@ class Graphics {
     private ctx: CanvasRenderingContext2D;
     private rotation: number;
     private translation: [number, number];
+    private pivot: [number, number, number];
 
     /**
      * Constructs a Graphics object. This object keeps track of the CanvasRenderingContext2D, which is used for drawing on the HTML canvas.
@@ -18,6 +19,7 @@ class Graphics {
         this.ctx.textAlign = "start";
         this.rotation = 0;
         this.translation = [0, 0];
+        this.pivot = [0, 0, 0]; // x, y, v
     }
 
     /**
@@ -152,6 +154,17 @@ class Graphics {
         return this.rotation;
     }
 
+    public pivotBegin(x: number, y: number, v: number): void {
+        this.pivot = [x, y, v];
+        this.addTranslation(x , y);
+        this.addRotation(v);
+    }
+
+    public pivotEnd(): void {
+        this.addRotation(-this.pivot[2]);
+        this.addTranslation(-this.pivot[0], -this.pivot[1]);
+    }
+
     /**
      * Fills a rectangle with the given dimensions at the given position.
      * @param x The x coordinate the sprite is drawn to on the canvas.
@@ -261,8 +274,7 @@ class Graphics {
      */
     private makePolygon(x: number, y: number, r: number, n: number, v: number, fill: boolean): void {
         let ang = Math.PI * 2 / n;
-        this.addTranslation(x , y);
-        this.addRotation(v + Math.PI);
+        this.pivotBegin(x, y, v + Math.PI);
         this.ctx.beginPath();
         this.ctx.moveTo(Math.sin(ang) * r, Math.cos(ang) * r);
         for (let i = 0; i <= n; i++) {
@@ -274,8 +286,7 @@ class Graphics {
         else {
             this.ctx.stroke();
         }
-        this.addRotation(-(v + Math.PI));
-        this.addTranslation(-x , -y);
+        this.pivotEnd();
     }
 
     /**
