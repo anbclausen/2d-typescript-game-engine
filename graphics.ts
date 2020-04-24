@@ -235,7 +235,7 @@ class Graphics {
      * @param v The rotation of the polygon in radians.
      */
     public fillPolygon(x: number, y: number, r: number, n: number, v: number): void {
-        this.makePolygon(x, y, r, n, true, v);
+        this.makePolygon(x, y, r, n, v, true);
     }
 
     /**
@@ -247,7 +247,7 @@ class Graphics {
      * @param v The rotation of the polygon in radians.
      */
     public drawPolygon(x: number, y: number, r: number, n: number, v: number): void {
-        this.makePolygon(x, y, r, n, false, v);
+        this.makePolygon(x, y, r, n, v, false);
     }
 
     /**
@@ -256,10 +256,10 @@ class Graphics {
      * @param y The y coordinate for the center of the polygon.
      * @param r The radius of the polygon.
      * @param n The number of sides in the polygon
-     * @param fill A boolean indicating if the polygon should be filled.
      * @param v The rotation of the polygon in radians.
+     * @param fill A boolean indicating if the polygon should be filled.
      */
-    private makePolygon(x: number, y: number, r: number, n: number, fill: boolean, v: number): void {
+    private makePolygon(x: number, y: number, r: number, n: number, v: number, fill: boolean): void {
         let ang = Math.PI * 2 / n;
         this.addTranslation(x , y);
         this.addRotation(v + Math.PI);
