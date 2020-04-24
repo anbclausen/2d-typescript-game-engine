@@ -153,6 +153,22 @@ class Graphics {
     }
 
     /**
+     * Converts degrees to radians.
+     * @param v The angle in degrees.
+     */
+    public degToRad(v: number): number {
+        return v / 360 * 2 * Math.PI;
+    }
+
+    /**
+     * Converts radians to degrees.
+     * @param v The angle in radians.
+     */
+    public radToDeg(v: number): number {
+        return v / (2 * Math.PI) * 360;
+    }
+
+    /**
      * Fills a rectangle with the given dimensions at the given position.
      * @param x The x coordinate the sprite is drawn to on the canvas.
      * @param y The y coordinate the sprite is drawn to on the canvas.
@@ -261,7 +277,7 @@ class Graphics {
      */
     private makePolygon(x: number, y: number, r: number, n: number, v: number, fill: boolean): void {
         let ang = Math.PI * 2 / n;
-        this.addTranslation(x , y);
+        this.addTranslation(x, y);
         this.addRotation(v + Math.PI);
         this.ctx.beginPath();
         this.ctx.moveTo(Math.sin(ang) * r, Math.cos(ang) * r);
@@ -275,7 +291,7 @@ class Graphics {
             this.ctx.stroke();
         }
         this.addRotation(-(v + Math.PI));
-        this.addTranslation(-x , -y);
+        this.addTranslation(-x, -y);
     }
 
     /**
