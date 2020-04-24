@@ -25,9 +25,6 @@
     var skipFrames: boolean = true;
 }
 
-/// <reference path="graphics.ts"/>
-/// <reference path="game.ts"/>
-
 var canvas: HTMLCanvasElement;
 var context: CanvasRenderingContext2D;
 
