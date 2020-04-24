@@ -39,12 +39,12 @@ Please refer to [TypeScript's official download page](https://www.typescriptlang
 Navigate to the folder where you've placed the engine in your terminal and write 
 
 ```
-python3 corsserver.py
+python3 server/corsserver.py
 ```
 
 This is your local server. Keep this running.
 
-Now open up *game.ts* in your favorite text editor ([Visual Studio Code](https://code.visualstudio.com/) is great for writing TypeScript), and start coding!
+Now open up *typescript/game.ts* in your favorite text editor ([Visual Studio Code](https://code.visualstudio.com/) is great for writing TypeScript), and start coding!
 
 ### Compiling TypeScript
 
@@ -54,7 +54,7 @@ Use the command
 tsc filename.ts
 ```
 
-in your terminal to compile from TypeScript to JavaScript.
+in your terminal to compile from TypeScript to JavaScript (be sure you're in the typescript folder).
 
 Alternatively just run the command
 
@@ -79,4 +79,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 * Code for python server is directly taken from [this](https://stackoverflow.com/a/21957017) stackoverflow answer.
-* [johandegn](https://github.com/johandegn) did some modifications to this project. Thanks for that!
+* [johandegn](https://github.com/johandegn) did various modifications to the graphics library. Thanks for that!
+
