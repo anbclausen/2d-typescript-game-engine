@@ -16,7 +16,7 @@
     var fps: number = 30;
 
     //how much do you want to scale the window (multiplier)
-    var scale: number = 2;
+    var scale: number = 1;
 
     //turn interpolation on or off (pixelate or not)
     var interpolation: boolean = false;
