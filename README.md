@@ -1,5 +1,5 @@
 # Special edition without resources
-This specificbranch is an alternative of my TypeScript engine, but without a server or resources. Ignore anything about the server in the readme.
+This specific branch is an alternative of my TypeScript engine, but without a server or resources. Developed speicifcally for the HCI course, Aarhus University, 2020. Ignore anything about the server in the readme.
 
 # 2D TypeScript Game Engine
 
