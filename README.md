@@ -1,3 +1,6 @@
+# Special edition without resources
+This specificbranch is an alternative of my TypeScript engine, but without a server or resources. Ignore anything about the server in the readme.
+
 # 2D TypeScript Game Engine
 
 This is a simple 2D game engine written in TypeScript.

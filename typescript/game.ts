@@ -1,13 +1,8 @@
 class Game {
-    // images are represented as HTMLImageElements
-    image: HTMLImageElement;
-
     // let's define an x coordinate for something we want to draw
     x: number;
 
     constructor() {
-        // using the loadImg method in manager.ts to load typescript.png from your local server
-        this.image = loadImg("http://127.0.0.1:8000/res/typescript.png");
 
         this.x = 100;
     }
@@ -18,9 +13,6 @@ class Game {
 
         // drawing a string a with x-position this.x
         _g.drawString("Press the right arrow key!", this.x, 100);
-
-        // drawing an image from your local server
-        _g.drawImage(this.image, 100, 200);
     }
 
     public update = (): void => {
