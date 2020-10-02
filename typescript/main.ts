@@ -9,8 +9,8 @@
 //The only thing you should edit in this class
 {
     //width and height for canvas in browser
-    var WIDTH: number = 1365;
-    var HEIGHT: number = 805;
+    var WIDTH: number = 1024;
+    var HEIGHT: number = 768;
 
     //frames per second of the game (60 is about max, but it's unstable), go for 30-55
     var fps: number = 30;
